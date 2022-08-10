@@ -1,7 +1,9 @@
 import React from "react";
+import axios from "axios";
 
 var UserStateContext = React.createContext();
 var UserDispatchContext = React.createContext();
+var loginDetails;
 
 function userReducer(state, action) {
   switch (action.type) {
@@ -44,18 +46,31 @@ function useUserDispatch() {
   }
   return context;
 }
-
-export { UserProvider, useUserState, useUserDispatch, loginUser, signOut };
-
 // ###########################################################
 
-function loginUser(dispatch, login, password, history, setIsLoading, setError) {
+ const loginUser = async(dispatch, login, password, history, setIsLoading, setError) => {
   setError(false);
   setIsLoading(true);
 
-  if (!!login && !!password) {
+
+  loginDetails = await axios({
+  
+    // Endpoint to send files
+    url: "http://localhost:8080/student/login"+"?emailId="+login+"&password="+password,
+    method: "GET",
+    headers: {
+    },
+  }).then((res) => {
+      console.log(res.data)
+      return res.data;
+     }).catch((err) => { });
+    console.log(loginDetails)
+  if (loginDetails) {
     setTimeout(() => {
-      localStorage.setItem('id_token', 1)
+      localStorage.setItem('firstName',loginDetails.firstName)
+      localStorage.setItem('lastName',loginDetails.lastName)
+      localStorage.setItem('userType',loginDetails.userType)
+      localStorage.setItem('emailId',loginDetails.emailId)
       setError(null)
       setIsLoading(false)
       dispatch({ type: 'LOGIN_SUCCESS' })
@@ -63,14 +78,15 @@ function loginUser(dispatch, login, password, history, setIsLoading, setError) {
       history.push('/app/dashboard')
     }, 2000);
   } else {
-    dispatch({ type: "LOGIN_FAILURE" });
     setError(true);
     setIsLoading(false);
   }
 }
 
 function signOut(dispatch, history) {
-  localStorage.removeItem("id_token");
+  localStorage.clear();
   dispatch({ type: "SIGN_OUT_SUCCESS" });
   history.push("/login");
 }
+
+export { UserProvider, useUserState, useUserDispatch, loginUser, signOut };

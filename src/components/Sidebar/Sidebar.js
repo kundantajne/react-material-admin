@@ -4,7 +4,6 @@ import {
   Home as HomeIcon,
   NotificationsNone as NotificationsIcon,
   FormatSize as TypographyIcon,
-  FilterNone as UIElementsIcon,
   BorderAll as TableIcon,
   ArrowBack as ArrowBackIcon,
 } from "@material-ui/icons";
@@ -25,6 +24,7 @@ import {
   toggleSidebar,
 } from "../../context/LayoutContext";
 
+console.log("SideBar loaded");
 const structure = [
   { id: 0, label: "Dashboard", link: "/app/dashboard", icon: <HomeIcon /> },
   {
@@ -34,17 +34,11 @@ const structure = [
     icon: <TypographyIcon />,
   },
   { id: 2, label: "TimeTable", link: "/app/tables", icon: <TableIcon /> },
-  {
+ {
     id: 3,
-    label: "Notifications",
+    label: "Register",
     link: "/app/notifications",
     icon: <NotificationsIcon />,
-  },
-  {
-    id: 4,
-    label: "Profile",
-    link: "/app/ui",
-    icon: <UIElementsIcon />
   }
 ];
 

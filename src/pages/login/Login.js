@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import {
   Grid,
   CircularProgress,
@@ -8,16 +9,19 @@ import {
   Tab,
   TextField,
   Fade,
+  Select,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Box
 } from "@material-ui/core";
 import { withRouter } from "react-router-dom";
-import classnames from "classnames";
 
 // styles
 import useStyles from "./styles";
 
 // logo
 import logo from "./logo.svg";
-import google from "../../images/google.svg";
 
 // context
 import { useUserDispatch, loginUser } from "../../context/UserContext";
@@ -32,15 +36,41 @@ function Login(props) {
   var [isLoading, setIsLoading] = useState(false);
   var [error, setError] = useState(null);
   var [activeTabId, setActiveTabId] = useState(0);
-  var [nameValue, setNameValue] = useState("");
-  var [loginValue, setLoginValue] = useState("admin@flatlogic.com");
-  var [passwordValue, setPasswordValue] = useState("password");
+  var [fNameValue, setFNameValue] = useState("");
+  var [lNameValue, setLNameValue] = useState("");
+  var [loginValue, setLoginValue] = useState("");
+  var [passwordValue, setPasswordValue] = useState("");
+  var [courseValue, setCourseValue] = useState("");
+  var [genderValue, setGenderValue] = useState("");
+
+
+
+const signup =()=>  {
+
+  const data = {
+    firstName: fNameValue,
+    lastName: lNameValue,
+    emailId: loginValue,
+    gender: genderValue,
+    password: passwordValue
+  };
+
+  axios({
+    url: "http://localhost:8080/student/createUser",
+    method: "POST",
+    headers: {
+    },
+    data:data
+  }).then((res) => {
+     console.log("User Created SuccessFully")
+     }).catch((err) => { });
+}
 
   return (
     <Grid container className={classes.container}>
       <div className={classes.logotypeContainer}>
         <img src={logo} alt="logo" className={classes.logotypeImage} />
-        <Typography className={classes.logotypeText}>Material Admin</Typography>
+        <Typography className={classes.logotypeText}>Cdac Student Portal</Typography>
       </div>
       <div className={classes.formContainer}>
         <div className={classes.form}>
@@ -56,17 +86,10 @@ function Login(props) {
           </Tabs>
           {activeTabId === 0 && (
             <React.Fragment>
-              <Typography variant="h1" className={classes.greeting}>
-                Good Morning, User
-              </Typography>
-              <Button size="large" className={classes.googleButton}>
-                <img src={google} alt="google" className={classes.googleIcon} />
-                &nbsp;Sign in with Google
-              </Button>
               <div className={classes.formDividerContainer}>
-                <div className={classes.formDivider} />
+                {/* <div className={classes.formDivider} />
                 <Typography className={classes.formDividerWord}>or</Typography>
-                <div className={classes.formDivider} />
+                <div className={classes.formDivider} /> */}
               </div>
               <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
@@ -140,29 +163,41 @@ function Login(props) {
           )}
           {activeTabId === 1 && (
             <React.Fragment>
-              <Typography variant="h1" className={classes.greeting}>
-                Welcome!
-              </Typography>
-              <Typography variant="h2" className={classes.subGreeting}>
+              {/* <Typography variant="h2" className={classes.subGreeting}>
                 Create your account
-              </Typography>
+              </Typography> */}
               <Fade in={error}>
                 <Typography color="secondary" className={classes.errorMessage}>
                   Something is wrong with your login or password :(
                 </Typography>
               </Fade>
               <TextField
-                id="name"
+                id="fName"
                 InputProps={{
                   classes: {
                     underline: classes.textFieldUnderline,
                     input: classes.textField,
                   },
                 }}
-                value={nameValue}
-                onChange={e => setNameValue(e.target.value)}
+                value={fNameValue}
+                onChange={e => setFNameValue(e.target.value)}
                 margin="normal"
-                placeholder="Full Name"
+                placeholder="First Name"
+                type="text"
+                fullWidth
+              />
+              <TextField
+                id="lName"
+                InputProps={{
+                  classes: {
+                    underline: classes.textFieldUnderline,
+                    input: classes.textField,
+                  },
+                }}
+                value={lNameValue}
+                onChange={e => setLNameValue(e.target.value)}
+                margin="normal"
+                placeholder="Last Name"
                 type="text"
                 fullWidth
               />
@@ -177,10 +212,39 @@ function Login(props) {
                 value={loginValue}
                 onChange={e => setLoginValue(e.target.value)}
                 margin="normal"
-                placeholder="Email Adress"
+                placeholder="Email Address"
                 type="email"
                 fullWidth
               />
+              <FormControl sx={{ m: 1, minWidth: 120 }} fullWidth={true}>
+              <InputLabel id="demo-simple-select-helper-label">Course</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="course"
+                value={courseValue}
+                onChange={e => setCourseValue(e.target.value)}
+              >
+                <MenuItem value={10}>Ten</MenuItem>
+                <MenuItem value={20}>Twenty</MenuItem>
+                <MenuItem value={30}>Thirty</MenuItem>
+              </Select>
+              </FormControl>
+              <Box paddingRight={"100px"}>
+              <FormControl sx={{ m: 1, minWidth: 120}} size="medium">
+              <InputLabel id="demo-simple-select-helper-label">Gender</InputLabel>
+              <Select
+                labelId="demo-simple-select-helper-label"
+                id="demo-simple-select-helper"
+                label="gender"
+                value={genderValue}
+                onChange={e => setGenderValue(e.target.value)}
+              >
+                <MenuItem value={"Male"}>Male</MenuItem>
+                <MenuItem value={"Female"}>Female</MenuItem>
+              </Select>
+              </FormControl>
+              </Box>
               <TextField
                 id="password"
                 InputProps={{
@@ -202,19 +266,18 @@ function Login(props) {
                 ) : (
                   <Button
                     onClick={() =>
-                      loginUser(
-                        userDispatch,
-                        loginValue,
-                        passwordValue,
-                        props.history,
-                        setIsLoading,
-                        setError,
+                      signup(
+                        // userDispatch,
+                        // loginValue,
+                        // passwordValue,
+                        // props.history,
+                        // setIsLoading,
+                        // setError,
                       )
                     }
                     disabled={
                       loginValue.length === 0 ||
-                      passwordValue.length === 0 ||
-                      nameValue.length === 0
+                      passwordValue.length === 0
                     }
                     size="large"
                     variant="contained"
@@ -226,27 +289,9 @@ function Login(props) {
                   </Button>
                 )}
               </div>
-              <div className={classes.formDividerContainer}>
-                <div className={classes.formDivider} />
-                <Typography className={classes.formDividerWord}>or</Typography>
-                <div className={classes.formDivider} />
-              </div>
-              <Button
-                size="large"
-                className={classnames(
-                  classes.googleButton,
-                  classes.googleButtonCreating,
-                )}
-              >
-                <img src={google} alt="google" className={classes.googleIcon} />
-                &nbsp;Sign in with Google
-              </Button>
             </React.Fragment>
           )}
         </div>
-        <Typography color="primary" className={classes.copyright}>
-        © 2014-{new Date().getFullYear()} <a style={{ textDecoration: 'none', color: 'inherit' }} href="https://flatlogic.com" rel="noopener noreferrer" target="_blank">Flatlogic</a>, LLC. All rights reserved.
-        </Typography>
       </div>
     </Grid>
   );

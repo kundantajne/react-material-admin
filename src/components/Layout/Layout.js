@@ -37,10 +37,9 @@ import { useLayoutState } from "../../context/LayoutContext";
 
 function Layout(props) {
   var classes = useStyles();
-
   // global
   var layoutState = useLayoutState();
-
+console.log("Layout Loaded");
   return (
     <div className={classes.root}>
         <>
