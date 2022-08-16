@@ -72,7 +72,7 @@ console.log("Layout Loaded");
               alignItems={"center"}
               justifyContent="space-between"
             >
-              <div>
+              {/* <div>
                 <Link
                   color={'primary'}
                   href={'https://flatlogic.com/'}
@@ -97,8 +97,8 @@ console.log("Layout Loaded");
                 >
                   Blog
                 </Link>
-              </div>
-              <div>
+              </div> */}
+              {/* <div>
                 <Link
                   href={'https://www.facebook.com/flatlogic'}
                   target={'_blank'}
@@ -138,7 +138,7 @@ console.log("Layout Loaded");
                     />
                   </IconButton>
                 </Link>
-              </div>
+              </div> */}
             </Box>
           </div>
         </>

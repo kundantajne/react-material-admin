@@ -14,10 +14,10 @@ export default function TypographyPage() {
 
   return (
     <>
-      <PageTitle title="Typography" />
+      <PageTitle title="Study Material" />
       <Grid container spacing={4}>
         <Grid item xs={12} md={6}>
-          <Widget title="Headings" disableWidgetMenu>
+          {/* <Widget title="Headings" disableWidgetMenu>
             <div className={classes.dashedBorder}>
               <Typography variant="h1" className={classes.text}>
                 h1. Heading
@@ -36,10 +36,10 @@ export default function TypographyPage() {
               </Typography>
               <Typography variant="h6">h6. Heading</Typography>
             </div>
-          </Widget>
+          </Widget> */}
         </Grid>
         <Grid item xs={12} md={6}>
-          <Widget title="Typography Colors" disableWidgetMenu>
+          {/* <Widget title="Typography Colors" disableWidgetMenu>
             <div className={classes.dashedBorder}>
               <Typography variant="h1" color="primary" className={classes.text}>
                 h1. Heading
@@ -69,10 +69,10 @@ export default function TypographyPage() {
                 h6. Heading
               </Typography>
             </div>
-          </Widget>
+          </Widget> */}
         </Grid>
         <Grid item xs={12} md={6}>
-          <Widget title="Basic Text Settings" disableWidgetMenu>
+          {/* <Widget title="Basic Text Settings" disableWidgetMenu>
             <div className={classes.dashedBorder}>
               <Typography className={classes.text}>Basic text</Typography>
               <Typography className={classes.text} weight="light">
@@ -97,10 +97,10 @@ export default function TypographyPage() {
                 <i>Basic Cursive Text</i>
               </Typography>
             </div>
-          </Widget>
+          </Widget> */}
         </Grid>
         <Grid item xs={12} md={6}>
-          <Widget title="Text Size" disableWidgetMenu>
+          {/* <Widget title="Text Size" disableWidgetMenu>
             <div className={classes.dashedBorder}>
               <Typography className={classes.text} size="sm">
                 Heading Typography SM Font Size
@@ -118,7 +118,7 @@ export default function TypographyPage() {
                 Heading Typography XXL Font Size
               </Typography>
             </div>
-          </Widget>
+          </Widget> */}
         </Grid>
       </Grid>
     </>

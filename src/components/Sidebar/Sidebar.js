@@ -34,12 +34,12 @@ const structure = [
     icon: <TypographyIcon />,
   },
   { id: 2, label: "TimeTable", link: "/app/tables", icon: <TableIcon /> },
- {
-    id: 3,
-    label: "Register",
-    link: "/app/notifications",
-    icon: <NotificationsIcon />,
-  }
+//  {
+//     id: 3,
+//     label: "Register",
+//     link: "/app/notifications",
+//     icon: <NotificationsIcon />,
+//   }
 ];
 
 function Sidebar({ location }) {

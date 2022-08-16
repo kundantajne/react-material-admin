@@ -41,11 +41,10 @@ export default function Tables() {
   const classes = useStyles();
   return (
     <>
-      <PageTitle title="Tables" />
+      <PageTitle title="Time Table" />
       <Grid container spacing={4}>
         <Grid item xs={12}>
           <MUIDataTable
-            title="Employee List"
             data={datatableData}
             columns={["Name", "Company", "City", "State"]}
             options={{
@@ -54,9 +53,9 @@ export default function Tables() {
           />
         </Grid>
         <Grid item xs={12}>
-          <Widget title="Material-UI Table" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>
+          {/* <Widget title="Material-UI Table" upperTitle noBodyPadding bodyClass={classes.tableOverflow}>
             <Table data={mock.table} />
-          </Widget>
+          </Widget> */}
         </Grid>
       </Grid>
     </>
